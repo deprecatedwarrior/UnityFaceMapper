@@ -25,28 +25,30 @@ public class ImageTransform : MonoBehaviour {
 
 		if (! GetComponent<buttonLoadImage> ().imageLoaded () || done)
 			return;
-	
-		// Two finger touch
-		if (Input.touchCount == 2) {
+        
+            // Two finger touch
+            if (Input.touchCount == 2) {
 
-			// Get current touches
-			var touch0 = Input.GetTouch(0);
-			var touch1 = Input.GetTouch(1);
+                // Get current touches
+                var touch0 = Input.GetTouch(0);
+                var touch1 = Input.GetTouch(1);
 
-			// Get previous touches
-			Vector2 lastTouch0 = touch0.position  - touch0.deltaPosition;
-			Vector2 lastTouch1 = touch1.position  - touch1.deltaPosition;
+                // Get previous touches
+                Vector2 lastTouch0 = touch0.position  - touch0.deltaPosition;
+                Vector2 lastTouch1 = touch1.position  - touch1.deltaPosition;
 
-			// Distance between current touches
-			float touchDelta = (touch1.position - touch0.position).magnitude;
+                // Distance between current touches
+                float touchDelta = (touch1.position - touch0.position).magnitude;
 
-			// Distance between previous touches
-			float lastTouchDelta = (lastTouch0 - lastTouch1).magnitude;
+                // Distance between previous touches
+                float lastTouchDelta = (lastTouch0 - lastTouch1).magnitude;
 
-			// Difference bewteen current and last finger distance
-			float delta = touchDelta - lastTouchDelta;
+                // Difference bewteen current and last finger distance
+                float delta = touchDelta - lastTouchDelta;
+            
+        
 
-			var transform = GetComponent<Transform>();
+        var transform = GetComponent<Transform>();
 
 			var aspect = transform.localScale.x/transform.localScale.y;
 

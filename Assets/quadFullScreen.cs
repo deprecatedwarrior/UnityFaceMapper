@@ -5,8 +5,8 @@ public class quadFullScreen : MonoBehaviour {
 
 	Transform quadTransform;
 	startUpScript startUp;
-
-	public bool maintainAspectRatio = false;
+    //public imageGetPoints getPoints;  //AVI
+    public bool maintainAspectRatio = false;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +43,8 @@ public class quadFullScreen : MonoBehaviour {
 		}
 
 		Debug.Log ("start" + cameraWidth);
-
+        //getPoints.Start();
+      //  getPoints = imageGetPoints.Instantiate.Start;
 	
 	}
 	

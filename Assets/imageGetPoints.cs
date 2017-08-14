@@ -7,8 +7,8 @@ public class imageGetPoints : MonoBehaviour {
 	public List<Vector2> points = new List<Vector2>();
 
 	// Use this for initialization
-	void Start () {
-	
+	public void Start () {
+        //getMouseCoords();
 	}
 	
 	// Update is called once per frame
@@ -28,7 +28,7 @@ public class imageGetPoints : MonoBehaviour {
 		var pos = new Vector2 ();
 
 		pos.x = mousePos.x - rect.position.x;
-		pos.y = mousePos.y - rect.position.y;
+	    	pos.y = mousePos.y - rect.position.y;
 
 		Debug.Log ("ImagePixel = " + pos.ToString());
 
@@ -43,16 +43,14 @@ public class imageGetPoints : MonoBehaviour {
 
 		points.Add (finalPos);
 
-		if (points.Count >= 12) {
+        texture.SetPixel((int)finalPos.x, (int)finalPos.y, Color.green);
+        texture.Apply();
+        Debug.Log("points count: " + points.Count);
+
+        if (points.Count >= 12) {
 			GameObject.Find("fifaface_head").GetComponent<DelauneyApp>().makeFaceText(texture, points);
 			points.Clear ();
 		}
-
-
-		texture.SetPixel ((int)finalPos.x, (int)finalPos.y, Color.green);
-		texture.Apply ();
-		Debug.Log ("points count: " + points.Count);
-
-
+        
 	}
 }

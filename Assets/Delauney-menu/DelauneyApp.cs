@@ -166,7 +166,6 @@ public class DelauneyApp : MonoBehaviour {
 						//dst.SetPixel(i, j, Color.red);
 						inCount++;
 						break;
-
 					}
 					else
 					{

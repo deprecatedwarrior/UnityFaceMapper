@@ -37,14 +37,16 @@ public class pointSelect : MonoBehaviour {
 
 
 	void Start () {
+        pointList.Count.Equals(0);
+        arrows.Count.Equals(0);
+    }
 
-	}
+    void Update()
+    {
 
-	void Update () {
-
-		if (! this.doPointSelection || pointList.Count >= numPoints)
-			return;
-
+        if (!this.doPointSelection || pointList.Count >= numPoints)
+            return;
+        /*
 		if (Input.touchCount == 1 && (Input.GetTouch(0).phase == TouchPhase.Began)) {
 
 			var touch = Input.GetTouch(0);
@@ -54,31 +56,51 @@ public class pointSelect : MonoBehaviour {
 
 			// Get the pixel position in the image
 			var pixel = getImagePixel(pos);
+            */
 
-			// If the pixel coordinate is outside image, don't add point
-			if (!isInImage(pixel))
-				return;
+        //Get position of the point where the user clicks the mouse button
+        //var newPosition = Input.mousePosition;
+        Vector2 pos = Input.mousePosition;
 
-			// Add arrow sprite in point
-			arrows.Add((GameObject) Instantiate(Resources.Load("arrow"), Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, Camera.main.nearClipPlane + 1)), Quaternion.identity));
-			Instantiate(Resources.Load("arrow"), Camera.main.ScreenToWorldPoint(new Vector3(pixel.x, pixel.y, Camera.main.nearClipPlane + 1)), Quaternion.identity);
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        if (Input.GetMouseButtonDown(0))
+        {
+            pos.x = Input.mousePosition.x;
+            pos.y = Input.mousePosition.y;
+            Debug.Log("Detected Mouse Click at: " + pos.x);
 
-			// Add pixel coordinate to point list
-			pointList.Add(pixel);
+            //}
 
-			Debug.Log("Picked pixel: " + pixel + ", count: " + pointList.Count);
-			var tex = GetComponent<Renderer>().material.mainTexture as Texture2D;
-			//tex.SetPixel((int) pixel.x, (int) pixel.y, Color.cyan);
-			tex.Apply();
+            // Get the pixel position in the image
+            var pixel = getImagePixel(pos);
 
-			// If all points were taken, enable the 'done' button
-			if (pointList.Count >= numPoints)
-			{
-				GameObject.Find("Canvas/Panel/DoneBtn2").GetComponent<Button>().interactable = true;
-			}
-		}
+            // If the pixel coordinate is outside image, don't add point
+            if (!isInImage(pixel))
+                return;
+
+            // Add arrow sprite in point
+            arrows.Add((GameObject)Instantiate(Resources.Load("arrow"), Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, Camera.main.nearClipPlane + 1)), Quaternion.identity));
+            //Instantiate(Resources.Load("arrow"), Camera.main.ScreenToWorldPoint(new Vector3(pixel.x, pixel.y, Camera.main.nearClipPlane + 1)), Quaternion.identity);
+
+            // Add pixel coordinate to point list
+            pointList.Add(pixel);
+
+            Debug.Log("Picked pixel: " + pixel + ", count: " + pointList.Count);
+
+            var tex = GetComponent<Renderer>().material.mainTexture as Texture2D;
+
+            //tex.SetPixel((int) pixel.x, (int) pixel.y, Color.cyan);
+            tex.Apply();
+
+            // If all points were taken, enable the 'done' button
+            if (pointList.Count >= numPoints)
+            {
+                GameObject.Find("Canvas/Panel/DoneBtn2").GetComponent<Button>().interactable = true;
+            }
+        }
+    }
 	
-	}
 
 	/**
 	 * Checks if pixel is in the image
@@ -146,7 +168,7 @@ public class pointSelect : MonoBehaviour {
 		delauney.makeFaceText (GetComponent<Renderer> ().material.mainTexture as Texture2D, pointList);
 	}
 
-	// Add all maks points
+	// Add all mask points
 	void addMaskPoints ()
 	{
 		/*

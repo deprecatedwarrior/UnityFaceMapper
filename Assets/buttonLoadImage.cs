@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 using System.Collections;
 
-
 using ImageVideoContactPicker;
 
 public class buttonLoadImage : MonoBehaviour {
@@ -21,7 +20,9 @@ public class buttonLoadImage : MonoBehaviour {
 		_imageLoaded = false;
 	}
 
-	void Start(){}
+	void Start(){
+     //   test();
+    }
 
 	void Update () {
 	
@@ -60,7 +61,7 @@ public class buttonLoadImage : MonoBehaviour {
 	#elif UNITY_IPHONE
 		IOSPicker.BrowseImage ();
 	#else 
-		OnImageLoad("", Resources.Load ("scar") as Texture2D);
+		OnImageLoad("", Resources.Load ("ManFace") as Texture2D);
 	#endif
 	}
 }

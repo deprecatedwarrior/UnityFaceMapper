@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-#if UNITY_EDITORRR
+#if UNITY_EDITOR
 using UnityEditor;
 
 
